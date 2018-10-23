@@ -1,0 +1,4 @@
+proxy：CTP接口代理
+core：维护登录登出，提供行情数据，交易下单
+strategy：策略
+backTest：回测
