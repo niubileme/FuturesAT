@@ -10,6 +10,9 @@ using static HaiFeng.CTP_quote;
 
 namespace HaiFeng
 {
+    /// <summary>
+    /// CTP行情
+    /// </summary>
 	public class CTPQuote : Quote
 	{
 		CTP_quote _q = null;

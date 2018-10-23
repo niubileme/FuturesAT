@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace HaiFeng
 {
+    /// <summary>
+    /// 询价/行情
+    /// </summary>
 	public abstract class Quote
 	{
 		private ConcurrentDictionary<string, MarketData> _ticks = new ConcurrentDictionary<string, MarketData>();
@@ -159,23 +162,23 @@ namespace HaiFeng
 		/// </summary>
 		public abstract bool IsLogin { get; protected set; }
 
-		/// <summary>
-		/// 退订[接口会Release]
-		/// </summary>
-		public abstract void ReqUserLogout();
+        /// <summary>
+        /// 登出[接口会Release]
+        /// </summary>
+        public abstract void ReqUserLogout();
 
 		/// <summary>
-		/// 订阅合约
+		/// 订阅行情
 		/// </summary>
-		/// <param name="pInstrument"></param>
+		/// <param name="pInstrument">合约ID</param>
 		/// <returns></returns>
 		public abstract int ReqSubscribeMarketData(params string[] pInstrument);
 
-		/// <summary>
-		/// 退订
-		/// </summary>
-		/// <param name="pInstrument"></param>
-		/// <returns></returns>
-		public abstract int ReqUnSubscribeMarketData(params string[] pInstrument);
+        /// <summary>
+        /// 退订行情
+        /// </summary>
+        /// <param name="pInstrument">合约ID</param>
+        /// <returns></returns>
+        public abstract int ReqUnSubscribeMarketData(params string[] pInstrument);
 	}
 }

@@ -6,6 +6,9 @@ using System.Runtime.InteropServices;
 
 namespace HaiFeng
 {
+    /// <summary>
+    /// 
+    /// </summary>
 	public class CTP_quote
 	{
 		#region Dll Load /UnLoad
