@@ -100,41 +100,76 @@ namespace HaiFeng
 		public delegate IntPtr DeleReqUserLogout(IntPtr api, CThostFtdcUserLogoutField pUserLogout, int nRequestID);
 
 		#endregion
+
 		#region REQ函数
 
 		private int nRequestID = 0;
 
+        /// <summary>
+        /// 不再使用本接口对象时,调用该函数删除接口对象
+        /// </summary>
+        /// <returns></returns>
 		public IntPtr Release()
 		{
 			(Invoke(_handle, "RegisterSpi", typeof(DeleRegisterSpi)) as DeleRegisterSpi)(_api, IntPtr.Zero);
 			return (Invoke(_handle, "Release", typeof(DeleRelease)) as DeleRelease)(_api);
 		}
 
+        /// <summary>
+        /// 初始化运行环境,只有调用后,接口才开始发起前置的连接请求。
+        /// </summary>
+        /// <returns></returns>
 		public IntPtr Init()
 		{
 			return (Invoke(_handle, "Init", typeof(DeleInit)) as DeleInit)(_api);
 		}
 
+        /// <summary>
+        /// 客户端等待接口线程结束运行。
+        /// </summary>
+        /// <returns></returns>
 		public IntPtr Join()
 		{
 			return (Invoke(_handle, "Join", typeof(DeleJoin)) as DeleJoin)(_api);
 		}
 
+        /// <summary>
+        /// 获得当前交易日。只有当与交易托管系统连接建立后才会取到正确的值。
+        /// </summary>
+        /// <returns></returns>
 		public IntPtr GetTradingDay()
 		{
 			return (Invoke(_handle, "GetTradingDay", typeof(DeleGetTradingDay)) as DeleGetTradingDay)(_api);
 		}
 
+        /// <summary>
+        /// 设置交易托管系统的网络通讯地址，交易托管系统拥有多个通信地址，用户可以注册一个或多个地址。如果注册多个地址会随机选择一个尝试连接。
+        /// </summary>
+        /// <param name="pszFrontAddress"></param>
+        /// <returns></returns>
 		public IntPtr RegisterFront(string pszFrontAddress)
 		{
 			return (Invoke(_handle, "RegisterFront", typeof(DeleRegisterFront)) as DeleRegisterFront)(_api, pszFrontAddress);
 		}
 
+        /// <summary>
+        /// 设置名字服务器网络地址。RegisterNameServer优先于RegisterFront。
+        /// 调用前需要先使用RegisterFensUserInfo设置登录模式。
+        /// </summary>
+        /// <param name="pszNsAddress"></param>
+        /// <returns></returns>
 		public IntPtr RegisterNameServer(string pszNsAddress)
 		{
 			return (Invoke(_handle, "RegisterNameServer", typeof(DeleRegisterNameServer)) as DeleRegisterNameServer)(_api, pszNsAddress);
 		}
 
+        /// <summary>
+        /// 注册名字服务器用户信息，调用RegisterNameServer前需要先使用RegisterFensUserInfo设置登录模式
+        /// </summary>
+        /// <param name="BrokerID"></param>
+        /// <param name="UserID"></param>
+        /// <param name="LoginMode"></param>
+        /// <returns></returns>
 		public IntPtr RegisterFensUserInfo(string BrokerID = "", string UserID = "", TThostFtdcLoginModeType LoginMode = TThostFtdcLoginModeType.THOST_FTDC_LM_Trade)
 		{
 			CThostFtdcFensUserInfoField struc = new CThostFtdcFensUserInfoField
@@ -146,26 +181,65 @@ namespace HaiFeng
 			return (Invoke(_handle, "RegisterFensUserInfo", typeof(DeleRegisterFensUserInfo)) as DeleRegisterFensUserInfo)(_api, struc);
 		}
 
+        /// <summary>
+        /// 订阅行情，对应响应OnRspSubMarketData；订阅成功后，推送OnRtnDepthMarketData
+        /// </summary>
+        /// <param name="pInstruments"></param>
+        /// <param name="pCount"></param>
+        /// <returns></returns>
 		public IntPtr SubscribeMarketData(IntPtr pInstruments, int pCount)
 		{
 			return (Invoke(_handle, "SubscribeMarketData", typeof(DeleSubscribeMarketData)) as DeleSubscribeMarketData)(_api, pInstruments, pCount);
 		}
 
+        /// <summary>
+        /// 退订行情，对应响应OnRspUnSubMarketData
+        /// </summary>
+        /// <param name="pInstruments"></param>
+        /// <param name="pCount"></param>
+        /// <returns></returns>
 		public IntPtr UnSubscribeMarketData(IntPtr pInstruments, int pCount)
 		{
 			return (Invoke(_handle, "UnSubscribeMarketData", typeof(DeleUnSubscribeMarketData)) as DeleUnSubscribeMarketData)(_api, pInstruments, pCount);
 		}
 
+        /// <summary>
+        /// 订阅询价，对应响应OnRspSubForQuoteRsp；订阅成功后推送OnRtnForQuoteRsp
+        /// </summary>
+        /// <param name="pInstruments"></param>
+        /// <param name="pCount"></param>
+        /// <returns></returns>
 		public IntPtr SubscribeForQuoteRsp(IntPtr pInstruments, int pCount)
 		{
 			return (Invoke(_handle, "SubscribeForQuoteRsp", typeof(DeleSubscribeForQuoteRsp)) as DeleSubscribeForQuoteRsp)(_api, pInstruments, pCount);
 		}
 
+        /// <summary>
+        /// 退订询价，对应响应OnRspUnSubForQuoteRsp
+        /// </summary>
+        /// <param name="pInstruments"></param>
+        /// <param name="pCount"></param>
+        /// <returns></returns>
 		public IntPtr UnSubscribeForQuoteRsp(IntPtr pInstruments, int pCount)
 		{
 			return (Invoke(_handle, "UnSubscribeForQuoteRsp", typeof(DeleUnSubscribeForQuoteRsp)) as DeleUnSubscribeForQuoteRsp)(_api, pInstruments, pCount);
 		}
 
+        /// <summary>
+        /// 用户登录请求，对应响应OnRspUserLogin。目前行情登陆不校验账号密码
+        /// </summary>
+        /// <param name="TradingDay"></param>
+        /// <param name="BrokerID"></param>
+        /// <param name="UserID"></param>
+        /// <param name="Password"></param>
+        /// <param name="UserProductInfo"></param>
+        /// <param name="InterfaceProductInfo"></param>
+        /// <param name="ProtocolInfo"></param>
+        /// <param name="MacAddress"></param>
+        /// <param name="OneTimePassword"></param>
+        /// <param name="ClientIPAddress"></param>
+        /// <param name="LoginRemark"></param>
+        /// <returns></returns>
 		public IntPtr ReqUserLogin(string TradingDay = "", string BrokerID = "", string UserID = "", string Password = "", string UserProductInfo = "", string InterfaceProductInfo = "", string ProtocolInfo = "", string MacAddress = "", string OneTimePassword = "", string ClientIPAddress = "", string LoginRemark = "")
 		{
 			CThostFtdcReqUserLoginField struc = new CThostFtdcReqUserLoginField
@@ -185,6 +259,12 @@ namespace HaiFeng
 			return (Invoke(_handle, "ReqUserLogin", typeof(DeleReqUserLogin)) as DeleReqUserLogin)(_api, struc, this.nRequestID++);
 		}
 
+        /// <summary>
+        /// 登出请求，对应响应OnRspUserLogout
+        /// </summary>
+        /// <param name="BrokerID"></param>
+        /// <param name="UserID"></param>
+        /// <returns></returns>
 		public IntPtr ReqUserLogout(string BrokerID = "", string UserID = "")
 		{
 			CThostFtdcUserLogoutField struc = new CThostFtdcUserLogoutField
@@ -196,6 +276,7 @@ namespace HaiFeng
 		}
 
 		#endregion
+
 		delegate void DeleSet(IntPtr spi, Delegate func);
 
 		public delegate void DeleOnFrontConnected();

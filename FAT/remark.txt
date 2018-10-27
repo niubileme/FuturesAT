@@ -1,5 +1,6 @@
-Proxy：CTP接口代理
-Core：登录登出，行情数据，交易下单
+Proxy：CTP代理
+Core：登录登出，订阅行情，交易下单
 Strategy：策略
 BackTest：回测
 Repository:数据仓储
+Market:行情

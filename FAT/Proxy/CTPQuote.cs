@@ -18,6 +18,9 @@ namespace HaiFeng
 		CTP_quote _q = null;
 		private readonly List<Delegate> _listDele = new List<Delegate>();
 
+        /// <summary>
+        /// 
+        /// </summary>
 		public CTPQuote()
 		{
 			Directory.CreateDirectory("ctp_dll");
@@ -46,6 +49,10 @@ namespace HaiFeng
 			_q.SetOnRspError((DeleOnRspError)AddDele(new DeleOnRspError(CTPOnRspError)));
 		}
 
+        /// <summary>
+        /// 深度行情通知，当SubscribeMarketData订阅行情后，行情通知由此推送
+        /// </summary>
+        /// <param name="pDepthMarketData"></param>
 		private void CTPOnRtnDepthMarketData(ref CThostFtdcDepthMarketDataField pDepthMarketData)
 		{
 			CThostFtdcDepthMarketDataField f = pDepthMarketData;
@@ -171,8 +178,16 @@ namespace HaiFeng
 			_OnFrontConnected?.Invoke(this, new EventArgs());
 		}
 
+        /// <summary>
+        /// 是否登录成功
+        /// </summary>
 		public override bool IsLogin { get; protected set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pFront"></param>
+        /// <returns></returns>
 		public override int ReqConnect(params string[] pFront)
 		{
 			foreach (var addr in pFront)
@@ -182,6 +197,11 @@ namespace HaiFeng
 			//return (int)_q.Join(); //会造成阻塞
 		}
 
+        /// <summary>
+        /// 订阅行情，对应响应OnRspSubMarketData；订阅成功后，推送OnRtnDepthMarketData
+        /// </summary>
+        /// <param name="pInstrument"></param>
+        /// <returns></returns>
 		public override int ReqSubscribeMarketData(params string[] pInstrument)
 		{
 			IntPtr insts = Marshal.AllocHGlobal(IntPtr.Size * pInstrument.Length);
@@ -193,6 +213,11 @@ namespace HaiFeng
 			return (int)_q.SubscribeMarketData(insts, pInstrument.Length);
 		}
 
+        /// <summary>
+        /// 退订行情，对应响应OnRspUnSubMarketData
+        /// </summary>
+        /// <param name="pInstrument"></param>
+        /// <returns></returns>
 		public override int ReqUnSubscribeMarketData(params string[] pInstrument)
 		{
 			IntPtr insts = Marshal.AllocHGlobal(IntPtr.Size * pInstrument.Length);
@@ -204,11 +229,21 @@ namespace HaiFeng
 			return (int)_q.UnSubscribeMarketData(insts, pInstrument.Length);
 		}
 
+        /// <summary>
+        /// 用户登录请求，对应响应OnRspUserLogin。目前行情登陆不校验账号密码
+        /// </summary>
+        /// <param name="pInvestor"></param>
+        /// <param name="pPassword"></param>
+        /// <param name="pBroker"></param>
+        /// <returns></returns>
 		public override int ReqUserLogin(string pInvestor, string pPassword, string pBroker)
 		{
 			return (int)_q.ReqUserLogin(BrokerID: pBroker, UserID: pInvestor, Password: pPassword);
 		}
 
+        /// <summary>
+        /// 登出请求，对应响应OnRspUserLogout
+        /// </summary>
 		public override void ReqUserLogout()
 		{
 			this.IsLogin = false;
