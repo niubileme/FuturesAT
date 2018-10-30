@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\Configure.cs" />
     <Compile Include="Log\Logger.cs" />
     <Compile Include="ObjectId\IdWorker.cs" />
     <Compile Include="ObjectId\RandomId.cs" />
@@ -57,7 +58,6 @@
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Configuration\" />
     <Folder Include="Extension\" />
     <Folder Include="Helper\" />
   </ItemGroup>

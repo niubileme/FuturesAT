@@ -41,7 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IFutureMarket.cs" />
+    <Compile Include="IStockMarket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sina\SinaFutureMarket.cs" />
+    <Compile Include="Sina\SinaStockMarket.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
