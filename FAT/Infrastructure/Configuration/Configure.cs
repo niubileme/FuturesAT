@@ -9,14 +9,14 @@ namespace Infrastructure.Configuration
 {
     public class Configure
     {
-        public string GetValue(string key, string value = "")
+        public static string GetStringValue(string key, string value = "")
         {
             string val = ConfigurationManager.AppSettings[key] as string;
 
             return !string.IsNullOrWhiteSpace(val) ? val.Trim() : value;
         }
 
-        public int GetValue(string key, int value = 0)
+        public static int GetIntValue(string key, int value = 0)
         {
             int i = 0;
             string val = ConfigurationManager.AppSettings[key];
@@ -24,7 +24,7 @@ namespace Infrastructure.Configuration
             return int.TryParse(val, out i) ? i : value;
         }
 
-        public double GetValue(string key, double value = 0)
+        public static double GetDoubleValue(string key, double value = 0)
         {
             double i = 0;
             string val = ConfigurationManager.AppSettings[key];
@@ -32,7 +32,7 @@ namespace Infrastructure.Configuration
             return double.TryParse(val, out i) ? i : value;
         }
 
-        public decimal GetValue(string key, decimal value = 0)
+        public static decimal GetDecimalValue(string key, decimal value = 0)
         {
             decimal i = 0;
             string val = ConfigurationManager.AppSettings[key];

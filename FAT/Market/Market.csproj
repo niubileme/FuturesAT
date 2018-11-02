@@ -47,5 +47,15 @@
     <Compile Include="Sina\SinaFutureMarket.cs" />
     <Compile Include="Sina\SinaStockMarket.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
+      <Project>{F19487C9-C9C3-4FA8-9521-4F9C5A6BABF5}</Project>
+      <Name>Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{AA464FF1-A7E6-4F02-BED7-BA5C000663B8}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

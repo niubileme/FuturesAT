@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,10 @@ namespace Market
 {
     public interface IFutureMarket
     {
+        /// <summary>
+        /// 获取所有的品种
+        /// </summary>
+        /// <returns></returns>
+        List<FutureModel> GetFutures();
     }
 }
