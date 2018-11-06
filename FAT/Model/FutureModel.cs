@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class FutureModel
+    public class FutureModel : MongoObjectIdModel
     {
-        public string Id { get; set; }
         /// <summary>
         /// 品种代码
         /// </summary>

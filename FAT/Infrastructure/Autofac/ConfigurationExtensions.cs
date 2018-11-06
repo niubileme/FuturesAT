@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Autofac;
+using Infrastructure.Autofac;
 using Infrastructure.Components;
 using Infrastructure.Configurations;
 
-namespace Infrastructure.Autofac
+namespace Infrastructure
 {
     public static class ConfigurationExtensions
     {

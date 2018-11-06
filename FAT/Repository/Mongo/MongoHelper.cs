@@ -32,31 +32,33 @@ namespace Repository.Mongo
 
         public readonly string _constr;
         public readonly string _dbName;
-        public readonly string _collectionName;
         private readonly MongoClient _client;
 
         private MongoHelper()
         {
-            _constr = Config.GetStringValue("MongoDB:connectionString");
-            _dbName = Config.GetStringValue("MongoDB:defaultDBName");
-            _collectionName = Config.GetStringValue("MongoDB:defaultCollectionName");
+            _constr = Config.GetStringValue("MongoConnectionString");
+            _dbName = Config.GetStringValue("MongoDefaultDBName");
 
+            _client = new MongoClient(_constr);
+
+        }
+
+        public bool TestConnect()
+        {
             //测试连接
             try
             {
-                _client = new MongoClient(_constr);
-
                 var dbs = _client.ListDatabaseNames().ToList();
                 if (dbs.Count == 0)
                 {
                     throw new Exception("Mongodb Database Count:0");
                 }
+                return true;
             }
             catch (Exception ex)
             {
                 throw new Exception(string.Format("Mongodb连接失败：{0}\r\n{1}", ex.Message, ex.StackTrace));
             }
-
         }
 
         public IMongoDatabase GetDb()
@@ -69,14 +71,9 @@ namespace Repository.Mongo
             return _client.GetDatabase(dbName);
         }
 
-        public IMongoCollection<T> GetCollection<T>()
-        {
-            return GetCollection<T>(_collectionName);
-        }
-
         public IMongoCollection<T> GetCollection<T>(string collectionName)
         {
-            return GetCollection<T>(_dbName, _collectionName);
+            return GetCollection<T>(_dbName, collectionName);
         }
 
         public IMongoCollection<T> GetCollection<T>(string dbName, string collectionName)

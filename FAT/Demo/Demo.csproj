@@ -53,6 +53,18 @@
       <Project>{f19487c9-c9c3-4fa8-9521-4f9c5a6babf5}</Project>
       <Name>Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Market\Market.csproj">
+      <Project>{CF9C66A9-BC8A-43F3-A4EE-B180E81A999A}</Project>
+      <Name>Market</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{AA464FF1-A7E6-4F02-BED7-BA5C000663B8}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Repository\Repository.csproj">
+      <Project>{23A3ADB4-A5CA-43B9-8B31-78C079AA8C6D}</Project>
+      <Name>Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Repository.Mongo
 {
-    public class FutureRepository : RepositoryBase<FutureModel>, IFutureRepository<FutureModel>
+    public class FutureRepository : RepositoryBase<FutureModel>, IFutureRepository
     {
         public FutureRepository() : base("futures")
         {
