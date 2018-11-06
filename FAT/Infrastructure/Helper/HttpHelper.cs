@@ -11,11 +11,12 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Helper
 {
-    public class HtmlHelper
+    public class HttpHelper
     {
         private static readonly HttpClient _httpClient;
+        private static ILog Logger = LoggerFactory.Create("Infrastructure.HttpHelper");
 
-        static HtmlHelper()
+        static HttpHelper()
         {
             _httpClient = new HttpClient();
             _httpClient.DefaultRequestHeaders.Connection.Add("keep-alive");

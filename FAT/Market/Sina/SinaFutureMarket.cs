@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Infrastructure;
 using Infrastructure.Helper;
 using Infrastructure.Log;
 using Model;
@@ -13,6 +14,8 @@ namespace Market.Sina
 {
     public class SinaFutureMarket : IFutureMarket
     {
+        private static ILog Logger = LoggerFactory.Create("SinaFutureMarket");
+
         public List<FutureModel> GetFutures()
         {
             BlockingCollection<FutureModel> list = new BlockingCollection<FutureModel>();
@@ -25,7 +28,7 @@ namespace Market.Sina
                 var getUrl = url + index;
                 try
                 {
-                    var html = HtmlHelper.Get(getUrl);
+                    var html = HttpHelper.Get(getUrl);
                     if (!string.IsNullOrWhiteSpace(html))
                     {
                         var mc = Regex.Matches(html, "<td>(.+?)</td><td>(.+?)</td>");

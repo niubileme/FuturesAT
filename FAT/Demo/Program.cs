@@ -1,6 +1,7 @@
 ﻿using Infrastructure;
 using Infrastructure.Components;
 using Infrastructure.Configurations;
+using Infrastructure.Log;
 using Market;
 using Market.Sina;
 using Repository;
@@ -31,6 +32,8 @@ namespace Demo
 
             _futureRepository = new FutureRepository();
             //_futureRepository.InsertMany(infos);
+
+
             Console.WriteLine("ok");
 
 

@@ -59,8 +59,11 @@
     <Compile Include="Components\ObjectContainer.cs" />
     <Compile Include="Configurations\Config.cs" />
     <Compile Include="Configurations\Configuration.cs" />
-    <Compile Include="Helper\HtmlHelper.cs" />
-    <Compile Include="Log\Logger.cs" />
+    <Compile Include="Helper\HttpHelper.cs" />
+    <Compile Include="Log\ILog.cs" />
+    <Compile Include="Log\ILogExtensions.cs" />
+    <Compile Include="Log\ILoggerFactory.cs" />
+    <Compile Include="Log\NLogLogger.cs" />
     <Compile Include="ObjectId\IdWorker.cs" />
     <Compile Include="ObjectId\RandomId.cs" />
     <Compile Include="ObjectId\TimeExtensions.cs" />

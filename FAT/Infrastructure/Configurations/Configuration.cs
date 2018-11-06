@@ -30,7 +30,7 @@ namespace Infrastructure.Configurations
         {
             AppDomain.CurrentDomain.UnhandledException += (sender, e) =>
             {
-                Logger.Error("Unhandled exception: {0}", e.ExceptionObject);
+                LoggerFactory.Create("Unhandled").Error("Unhandled exception: {0}", e.ExceptionObject);
             };
             return this;
         }
