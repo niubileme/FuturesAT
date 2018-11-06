@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Configuration
+namespace Infrastructure.Configurations
 {
-    public class Configure
+    public class Config
     {
         public static string GetStringValue(string key, string value = "")
         {

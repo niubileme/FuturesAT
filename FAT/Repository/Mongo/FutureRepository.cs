@@ -9,7 +9,7 @@ namespace Repository.Mongo
 {
     public class FutureRepository : RepositoryBase<FutureModel>, IFutureRepository<FutureModel>
     {
-        public FutureRepository() : base("")
+        public FutureRepository() : base("futures")
         {
 
         }

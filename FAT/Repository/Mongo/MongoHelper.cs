@@ -1,4 +1,4 @@
-﻿using Infrastructure.Configuration;
+﻿using Infrastructure.Configurations;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -37,9 +37,9 @@ namespace Repository.Mongo
 
         private MongoHelper()
         {
-            _constr = Configure.GetStringValue("MongoDB:connectionString");
-            _dbName = Configure.GetStringValue("MongoDB:defaultDBName");
-            _collectionName = Configure.GetStringValue("MongoDB:defaultCollectionName");
+            _constr = Config.GetStringValue("MongoDB:connectionString");
+            _dbName = Config.GetStringValue("MongoDB:defaultDBName");
+            _collectionName = Config.GetStringValue("MongoDB:defaultCollectionName");
 
             //测试连接
             try
