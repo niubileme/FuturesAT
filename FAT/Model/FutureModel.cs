@@ -9,6 +9,10 @@ namespace Model
     public class FutureModel : MongoObjectIdModel
     {
         /// <summary>
+        /// 合约
+        /// </summary>
+        public string Contract { get; set; }
+        /// <summary>
         /// 品种代码
         /// </summary>
         public string Code { get; set; }
@@ -17,8 +21,12 @@ namespace Model
         /// </summary>
         public string Name { get; set; }
         /// <summary>
-        /// 所属交易所
+        /// 交易所代码
         /// </summary>
-        public string Exchange { get; set; }
+        public string MarketCode { get; set; }
+        /// <summary>
+        /// 交易所名称
+        /// </summary>
+        public string MarketName { get; set; }
     }
 }

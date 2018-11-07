@@ -17,6 +17,7 @@ namespace MarketUnitTest
         public void GetFutures()
         {
             var result = _futureMarket.GetFutures();
+
         }
     }
 }

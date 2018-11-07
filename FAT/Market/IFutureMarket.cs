@@ -10,7 +10,7 @@ namespace Market
     public interface IFutureMarket
     {
         /// <summary>
-        /// 获取所有的品种
+        /// 获取所有的合约品种
         /// </summary>
         /// <returns></returns>
         List<FutureModel> GetFutures();
