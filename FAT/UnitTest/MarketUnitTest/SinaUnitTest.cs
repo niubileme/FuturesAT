@@ -1,3 +1,4 @@
+﻿using System;
 using Market;
 using Market.Sina;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

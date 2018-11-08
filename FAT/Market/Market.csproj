@@ -48,7 +48,8 @@
     <Compile Include="IFutureMarket.cs" />
     <Compile Include="IStockMarket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sina\Model\FutureNode.cs" />
+    <Compile Include="Sina\Model\SinaFutureNode.cs" />
+    <Compile Include="Sina\Model\SinaFuture.cs" />
     <Compile Include="Sina\SinaFutureMarket.cs" />
     <Compile Include="Sina\SinaStockMarket.cs" />
   </ItemGroup>

@@ -26,20 +26,32 @@ namespace Market.Sina
             BlockingCollection<FutureModel> list = new BlockingCollection<FutureModel>();
 
 
-            var nodes = JsonConvert.DeserializeObject<List<FutureNode>>(jsonString);
+            var nodes = JsonConvert.DeserializeObject<List<SinaFutureNode>>(jsonString);
 
             var url = "http://vip.stock.finance.sina.com.cn/quotes_service/api/json_v2.php/Market_Center.getHQFuturesData?page=1&num=40&sort=symbol&asc=1&node={0}&_s_r_a=auto";
 
             Parallel.ForEach(nodes, item =>
             {
                 var node = item.Node;
-                url = string.Format(url, node);
+                var marketName = item.Jys;
+                var getUrl = string.Format(url, node);
                 try
                 {
-                    var html = HttpHelper.Get(url);
+                    var html = HttpHelper.Get(getUrl, null, "gb2312");
                     if (!string.IsNullOrWhiteSpace(html))
                     {
-                       
+                        var futures = JsonConvert.DeserializeObject<List<SinaFuture>>(html);
+                        foreach (var future in futures)
+                        {
+                            list.TryAdd(new FutureModel()
+                            {
+                                Contract = future.Contract,
+                                Code = future.Symbol,
+                                Name = future.Name,
+                                MarketCode = future.Market,
+                                MarketName = marketName
+                            });
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -48,25 +60,11 @@ namespace Market.Sina
                 }
             });
 
-
-
-            return list.ToList().ToList();
+            return list.ToList().OrderBy(x => x.MarketCode).ThenBy(x => x.Name).ToList();
         }
 
 
     }
 
-
-    public class Rootobject
-    {
-        public Class1[] Property1 { get; set; }
-    }
-
-    public class Class1
-    {
-        public string name { get; set; }
-        public string node { get; set; }
-        public string jys { get; set; }
-    }
 
 }
